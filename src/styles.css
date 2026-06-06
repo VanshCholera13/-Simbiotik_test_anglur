@@ -1,3 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
+
+/* Global light body background */
+body {
+  background-color: #f8fafc; /* slate-50 */
+  color: #0f172a; /* slate-900 */
+}
+
+/* Custom progress bar animation */
+@keyframes loadingBar {
+  0% { left: -30%; width: 30%; }
+  50% { left: 30%; width: 40%; }
+  100% { left: 100%; width: 30%; }
+}
+.animate-loading-bar {
+  position: fixed;
+  animation: loadingBar 1.5s infinite linear;
+}

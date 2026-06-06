@@ -1,10 +1,23 @@
 import { TestBed } from '@angular/core/testing';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { App } from './app';
+import { LoadingService } from './core/services/loading.service';
+import { provideRouter } from '@angular/router';
 
 describe('App', () => {
+  let loadingServiceMock: any;
+
   beforeEach(async () => {
+    loadingServiceMock = {
+      isLoading: () => false
+    };
+
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [
+        { provide: LoadingService, useValue: loadingServiceMock },
+        provideRouter([])
+      ]
     }).compileComponents();
   });
 
@@ -12,12 +25,5 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, weather-dashboard');
   });
 });
